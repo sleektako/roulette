@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GELBOORU // ROULETTE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <div class="main-wrapper">
+        
+        <header class="top-bar">
+            <div class="logo">
+                <span class="logo-icon">///</span> GELBOORU <span class="sub-logo">ROULETTE_SYSTEM</span>
+            </div>
+            <div class="system-status">
+				<span class="blink">SYSTEM_ONLINE</span> // V.1.0.0 // 
+				<a href="/logout" style="color: var(--c-red); text-decoration: none;">[DISCONNECT]</a>
+			</div>
+        </header>
+        
+        <div class="game-board">
+            
+            <div class="col-left">
+                <div class="corner-bracket top-left"></div>
+                <div class="corner-bracket top-right"></div>
+                <div class="corner-bracket bottom-left"></div>
+                <div class="corner-bracket bottom-right"></div>
+
+                <div class="roulette-box">
+                    <div id="image-container" class="image-slot">
+                        <span class="placeholder">NO_SIGNAL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-right">
+                
+                <div class="controls-header">
+                    <div class="deco-line"></div>
+                    <button id="nsfw-btn" class="mode-btn safe" onclick="toggleNSFW()">
+                        <span class="indicator"></span> SAFE_PROTOCOL
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label>SEARCH_PARAMETERS //</label>
+                    <div class="controls">
+                        <input type="text" id="add-tags" placeholder="ADD TAGS...">
+                        <input type="text" id="block-tags" placeholder="BLOCK TAGS...">
+                    </div>
+                </div>
+
+                <button id="spin-btn" onclick="startSpin()">
+                    <span class="btn-text">INITIALIZE SCAN</span>
+                    <span class="btn-deco">>>></span>
+                </button>
+
+                <div id="actions" class="actions hidden">
+                    <a id="source-link" href="#" target="_blank" class="action-btn source-btn">DATA_SOURCE</a>
+                    <a id="download-link" href="#" class="action-btn dl-btn">ARCHIVE_FILE</a>
+                </div>
+
+                <div id="stats-box" class="stats-box hidden">
+                    <h3>// ASSET_METADATA</h3>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <span class="label">ID</span>
+                            <span id="stat-id" class="value">--</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">DATE</span>
+                            <span id="stat-date" class="value">--</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">USER</span>
+                            <span id="stat-uploader" class="value">--</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">RES</span>
+                            <span id="stat-size" class="value">--</span>
+                        </div>
+                        <div class="stat-item full-width">
+                            <span class="label">SOURCE</span>
+                            <a id="stat-source" href="#" target="_blank" class="value link">--</a>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">RATING</span>
+                            <span id="stat-rating" class="value">--</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">SCORE</span>
+                            <span id="stat-score" class="value">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tags-area" class="tags-area hidden">
+                    <div class="tags-header">DETECTED_TAGS //</div>
+                    <div id="tags-list" class="tags-list"></div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+		<div id="image-modal" class="modal hidden" onclick="closeModal()">
+			<span class="modal-close" onclick="closeModal()">CLOSE_VISUAL // X</span>
+			<img id="modal-img" class="modal-content">
+			<div class="modal-caption">ASSET_PREVIEW_MODE</div>
+		</div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
