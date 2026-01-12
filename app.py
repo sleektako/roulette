@@ -30,7 +30,7 @@ def logout():
 # ROUTE: HOME
 @app.route('/')
 def home():
-    # If we don't have keys, kick them back to the login screen!
+    # If they don't have keys, kick them back to the login screen!
     if 'user_id' not in session or 'api_key' not in session:
         return redirect(url_for('login'))
     
