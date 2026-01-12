@@ -6,28 +6,28 @@ import os
 
 app = Flask(__name__)
 
-# SECURITY KEY: Needed to encrypt your session data (cookies)
+# SECURITY KEY: Needed to encrypt cookies
 # In a real app, this should be a long random string.
 app.secret_key = "ENDFIELD_INDUSTRIES_TOP_SECRET_PROTOCOL"
 
-# --- ROUTE: LOGIN PAGE ---
+# ROUTE: LOGIN PAGE
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Save the keys into the browser's temporary memory (Session)
+        # Save the keys into the browser's Session
         session['user_id'] = request.form.get('user_id')
         session['api_key'] = request.form.get('api_key')
         return redirect(url_for('home'))
     
     return render_template('login.html')
 
-# --- ROUTE: LOGOUT ---
+# ROUTE: LOGOUT
 @app.route('/logout')
 def logout():
     session.clear() # Wipe the memory
     return redirect(url_for('login'))
 
-# --- ROUTE: HOME ---
+# ROUTE: HOME
 @app.route('/')
 def home():
     # If we don't have keys, kick them back to the login screen!
@@ -51,7 +51,7 @@ def spin_roulette():
 
     base_tags = [] 
     if is_nsfw:
-        base_blocked = ["scat", "guro"] 
+        base_blocked = [] 
     else:
         base_blocked = ["rating:explicit", "rating:questionable", "gore", "scat"]
 
@@ -69,7 +69,7 @@ def spin_roulette():
     url = "https://gelbooru.com/index.php"
     
     try:
-        # STEP 1: Get Count
+        # Get Count
         count_params = {
             "page": "dapi", "s": "post", "q": "index", "json": 1, "limit": 0, 
             "tags": final_query, "api_key": API_KEY, "user_id": USER_ID
@@ -90,7 +90,7 @@ def spin_roulette():
         max_limit = min(total_posts, 20000) 
         random_pid = random.randint(0, max_limit - 1)
 
-        # STEP 2: Fetch
+        # Fetch
         fetch_params = {
             "page": "dapi", "s": "post", "q": "index", "json": 1, "limit": 1,
             "pid": random_pid, "tags": final_query, "api_key": API_KEY, "user_id": USER_ID
